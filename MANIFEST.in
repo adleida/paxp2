@@ -1,0 +1,2 @@
+include paxp2/res/*.json
+include paxp2/res/*.yaml

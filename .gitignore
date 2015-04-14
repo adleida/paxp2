@@ -1,0 +1,11 @@
+*~
+*.swp
+*.pyc
+*.log
+.DS_Store
+/.tox
+/*.egg-info/
+/dist/
+/build/
+/docs/html/
+/docs/demo/
