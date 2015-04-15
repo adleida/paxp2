@@ -37,7 +37,7 @@ setuptools.setup(
     platforms='any',
     entry_points='''
         [console_scripts]
-        paxp=paxp.cli:main
+        paxp2=paxp2.cli:main
     ''',
     install_requires=[
         'flask',
