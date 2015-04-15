@@ -1,0 +1,16 @@
+{
+  "id": "06304888-869b-4dd0-89d4-fda783a03400",
+  "adm": [
+    {
+      "id": "3ce51958c54d0f89721b9c0b1ab013e3b42eb9d4",
+      "data": {
+        "img": "http://ad-exchange-server/imga201",
+        "text": "下载京东App立马送代金券",
+        "app_url": "http://jingdong.../app/download.html"
+      }
+    }
+  ],
+  "did": "PINYOU",
+  "nurl": "http://www.pinyou.com/bid_result?id= bid_20151212",
+  "is_test": 0
+}

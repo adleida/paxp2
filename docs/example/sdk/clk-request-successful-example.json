@@ -1,0 +1,35 @@
+{
+  "adunit": {
+    "id": 0,
+    "type": 1,
+    "floor": 1.6,
+    "param": {
+      "count": 1
+    },
+    "cid": "A0",
+  },
+  "device": {
+    "os": "IOS",
+    "os_version": "8.3",
+    "brand": "asus",
+    "model": "ME371MG",
+    "resolution_w": 1280,
+    "resolution_h": 736,
+    "network_id": 70120,
+    "device_type": 2,
+    "detected_language": "zh",
+    "device_id": "358814057280846",
+    "device_id_enc": 0
+  },
+  "user_id": "a1020",
+  "is_test": 0,
+  "sdk": "BangBang",
+  "geo": {
+    "country": "China",
+    "city": "Beijing",
+    "latitude": 40.69847032728747,
+    "longtitude": -73.9514422416687
+  },
+  "deal_id": "",
+}
+

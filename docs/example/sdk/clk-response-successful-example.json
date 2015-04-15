@@ -1,0 +1,14 @@
+{
+  "adm": [
+    {
+      "id": "c20132334",
+      "data": {
+        "img": "http://ad-exchange-server/imga201",
+        "text": "下载京东App立马送代金券",
+        "app_url": "http://jingdong.../app/download.html"
+      }
+    }
+  ],
+  "nurl": "http://example.com/count",
+  "is_test": 0
+}

@@ -1,0 +1,28 @@
+{
+  "id": "06304888-869b-4dd0-89d4-fda783a03400",
+  "adunit": {
+    "id": 0,
+    "type": 1,
+    "floor": 1.6,
+    "param": {
+      "count": 1
+    }
+  },
+  "device": {
+    "os": "IOS",
+    "os_version": "8.3",
+    "brand": "asus",
+    "model": "ME371MG",
+    "resolution_w": 1280,
+    "resolution_h": 736,
+    "network_id": 70120,
+    "device_type": 2,
+    "detected_language": "zh",
+    "device_id": "358814057280846",
+    "device_id_enc": 0
+  },
+  "user_id": "",
+  "is_test": 0,
+  "geo": {
+  }
+}
