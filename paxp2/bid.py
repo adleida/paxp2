@@ -7,6 +7,8 @@
     This module implements the bidding logic
 '''
 
+import requests
+
 
 class BidRequest(object):
     pass

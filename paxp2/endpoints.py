@@ -10,6 +10,7 @@
 import paxp2
 import time
 from flask import jsonify
+from .validation import validate
 
 
 def index():
@@ -23,14 +24,16 @@ def index():
     return jsonify(data)
 
 
+@validate('click')
 def click():
 
-    data = {}
-    return jsonify(data)
+    data = {"id": "123456"}
+    return data
 
 
+@validate('notice')
 def notice():
 
-    data = {}
-    return jsonify(data)
+    data = {"id": "123456"}
+    return data
 

@@ -20,7 +20,7 @@ def main():
     args = parser.parse_args()
 
     app = paxp2.App(conf={})
-    app.run()
+    app.run(debug=True)
 
 
 if __name__ == '__main__':
