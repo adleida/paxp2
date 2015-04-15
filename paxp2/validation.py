@@ -36,10 +36,13 @@ def validate(schema):
                     if ok_2:
                         logger.debug('response is ok')
                     else:
+                        logger.warn('response is bad')
                         res = {'code': 2, 'detail': str(ex_2)}
                 else:
+                    logger.warn('request is bad')
                     res = {'code': 1, 'detail': str(ex_1)}
             except Exception as ex_3:
+                logger.warn('unknown error')
                 res = {'code': 3, 'detail': str(ex_3)}
 
             return jsonify(res)
