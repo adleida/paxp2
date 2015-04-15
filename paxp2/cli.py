@@ -8,6 +8,8 @@
 '''
 
 import argparse
+import logging
+import logging.config
 import paxp2
 import yaml
 
@@ -19,8 +21,14 @@ def main():
     parser.add_argument('-c', '--config')
     args = parser.parse_args()
 
-    app = paxp2.App(conf={})
-    app.run(debug=True)
+    conf = yaml.load(open(args.config))
+
+    log = conf.get('logging', {})
+    log.setdefault('version', 1)
+    logging.config.dictConfig(log)
+
+    app = paxp2.App(conf=conf)
+    app.run(debug=conf.get('debug', False))
 
 
 if __name__ == '__main__':

@@ -13,6 +13,7 @@ import json
 import jsonschema
 import os.path
 import pkgutil
+import requests
 import yaml
 
 
@@ -62,4 +63,9 @@ def load_json(data):
 def dump_json(data):
 
     return json.dumps(data, indent=2, ensure_ascii=False)
+
+
+def wget_json(url):
+
+    return requests.get(url).json()
 

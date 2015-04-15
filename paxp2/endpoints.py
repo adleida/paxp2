@@ -9,7 +9,7 @@
 
 import paxp2
 import time
-from flask import jsonify
+from flask import request, jsonify, current_app as app
 from .validation import validate
 
 
@@ -27,8 +27,8 @@ def index():
 @validate('click')
 def click():
 
-    data = {"id": "123456"}
-    return data
+    res = app.engine.handle(request.json)
+    return res
 
 
 @validate('notice')
