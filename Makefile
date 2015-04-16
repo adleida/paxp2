@@ -1,5 +1,9 @@
 .PHONY: test run wsgi deploy upload build
 
+PKG=$(shell python setup.py --fullname).tar.gz
+HOST=119
+DIR=/tmp
+
 all: clean test
 
 test:
@@ -17,12 +21,10 @@ clean:
 	find . -name '.*~' -delete
 	find . -name '__pycache__' -delete
 
-build:
-	python setup.py sdist
+pack:
+	python setup.py sdist --formats=gztar
 
-upload:
-	scp dist/*.gz 119:/tmp
-
-deploy:
-	echo deploy
+deploy: pack
+	scp dist/$(PKG) $(HOST):$(DIR)
+	ssh 119 "sudo pip install $(DIR)/$(PKG)"
 

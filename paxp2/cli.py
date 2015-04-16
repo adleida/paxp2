@@ -19,7 +19,7 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-v', '--version', action='version', version=paxp2.__version__)
-    parser.add_argument('-c', '--config')
+    parser.add_argument('-c', '--config', required=True)
     args = parser.parse_args()
 
     conf = yaml.load(open(args.config))
