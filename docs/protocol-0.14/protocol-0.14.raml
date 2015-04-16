@@ -1,0 +1,81 @@
+#%RAML 0.8
+
+resourceTypes:
+  - code:
+      post:
+        description: <<global-desc>>
+        queryParameters:
+          access_token:
+            description: <<local-desc>>
+            example: <<token>>
+            required: true
+            type: string
+        responses:
+          400:
+            description: "Bad Request"
+            body:
+              application/json:
+          401:
+            description: "Unauthorized"
+            body:
+              application/json:
+          408:
+            description: "Request Timeout"
+            body:
+              application/json:
+          500:
+            description: "Internal Server Error"
+            body:
+              application/json:
+
+title: PAXP
+baseUri: http://adx.adleida.com/{version}
+version: v1
+
+/clk/:
+  post:
+    body:
+      application/json:
+        schema: !include schema/clk-request-schema.json
+        example: !include example/clk-request-successful-example.json
+    responses:
+      200:
+        body:
+          application/json:
+            schema: !include schema/clk-response-schema.json
+            example: !include example/clk-response-successful-example.json
+  type:
+    code:
+      global-desc: "In order to request to dsp that sended by sdk"
+      local-desc: "Confirm token that verify action with sdk"
+      token: "f1fda941-0996-4a58-8b99-45fe1dea3202"
+
+/bid/:
+  post:
+    body:
+      application/json:
+        schema: !include schema/bid-request-schema.json
+        example: !include example/bid-request-example.json
+    responses:
+      200:
+        body:
+          application/json:
+            schema: !include schema/bid-response-schema.json
+            example: !include example/bid-response-example.json
+  type:
+    code:
+      global-desc: "redirect to dsp and compute bid result from response"
+      local-desc: "Confirm token that verify action with dsp"
+      token: "a0a44ebf-0ef6-45b4-a7b2-eb47370756ce"
+
+/notice/:
+  post:
+    body:
+      application/json:
+        schema: !include schema/notice-schema.json
+        example: !include example/notice-example.json
+  type:
+    code:
+      global-desc: "Notice to dsp after send result to sdk"
+      local-desc: "Confirm token that verify action with dsp when noticing"
+      token: "fb1b968d-7087-46b5-8fd7-9b96fcc52a81"

@@ -1,0 +1,41 @@
+error_code:
+  -1: 未知错误
+  0: 该 code 暂时空缺
+  1: JSON 格式错误
+  2: 消息格式错误, 缺少必需字段 (缺少必需头部, 缺少必需内容都在此错误类别中)
+  3: 不合理的 Imp 对象信息 (主要是序号错误)
+  4: 所出广告物料 ID 不存在 (不存在或者不属于该 DSP 都属于此类)
+  5: 竞价 Response 里 AppBid 的 id 与对应 Request 里 Impression 对象 id 不匹配
+  6: 竞价 Response 里 Did 错误
+  7: 竞价失败, 出价低于最高价
+  8: 竞价失败, 出价低于 Impression 所接受低价
+
+adunit_type:
+  1: app 推荐类广告
+
+param:
+  1: count
+
+device_type:
+  0: UNKNOWN
+  1: PC
+  2: MOBILE
+  3: PHONE
+  4: TABLET
+  5: TV
+
+network_type:
+  0: Wifi
+  70120: 中国移动
+  70121: 中国电信
+  70123: 中国联通
+
+encryption_type:
+  0: PLAIN, 明文
+  1: MD5
+  2: SHA1
+
+event_type:
+  0: 展示
+  1: 用户点击下载
+  2: 下载完成
