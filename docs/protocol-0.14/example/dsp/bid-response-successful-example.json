@@ -2,15 +2,24 @@
   "id": "06304888-869b-4dd0-89d4-fda783a03400",
   "adm": [
     {
-      "id": "3ce51958c54d0f89721b9c0b1ab013e3b42eb9d4",
+      "id": "c20132334",
       "data": {
         "img": "http://ad-exchange-server/imga201",
         "text": "下载 PayPal App 立马送 Minecraft",
         "app_url": "http://paypal.../app/download.html"
-      }
+      },
+      "price": 1.6,
+      "click_through_url": [
+        "http://example1.com/1",
+        "http://example2.com/1"
+      ],
+      "tracking_url": [
+        "http://example1.com/2",
+        "http://example2.com/2"
+      ]
     }
   ],
   "did": "PINYOU",
-  "nurl": "http://www.pinyou.com/bid_result?id= bid_20151212",
+  "nurl": "http://www.pinyou.com/bid_result?id=bid_20151212",
   "is_test": 0
 }
