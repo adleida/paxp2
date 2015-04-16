@@ -27,7 +27,7 @@ def validate(schema):
         def decorated(*args, **kwargs):
 
             try:
-                req = request.json
+                req = request.get_json()
                 ok_1, ex_1 = check_schema(req, req_schema)
                 if ok_1:
                     logger.debug('requset is ok')

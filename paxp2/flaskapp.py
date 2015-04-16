@@ -39,23 +39,18 @@ class App(Flask):
 
     def load_config(self):
         
-        logger.info('load config')
-
         self.config.update(self.conf)
 
     def init_rules(self):
 
-        logger.info('init rules')
-
         self.add_url_rule(rule='/', view_func=endpoints.index, methods=['GET'])
-        self.add_url_rule(rule='/click', view_func=endpoints.click, methods=['POST'])
-        self.add_url_rule(rule='/click/', view_func=endpoints.click, methods=['POST'])
-        self.add_url_rule(rule='/notice', view_func=endpoints.notice, methods=['POST'])
-        self.add_url_rule(rule='/notice/', view_func=endpoints.notice, methods=['POST'])
+        self.add_url_rule(rule='/clk', view_func=endpoints.click, methods=['POST'])
+        self.add_url_rule(rule='/clk/', view_func=endpoints.click, methods=['POST'])
+        self.add_url_rule(rule='/stats', view_func=endpoints.stats, methods=['GET'])
+        self.add_url_rule(rule='/stats/', view_func=endpoints.stats, methods=['GET'])
+        self.error_handler_spec[None][404] = lambda error: endpoints.index()
 
     def init_engine(self):
-
-        logger.info('init engine')
 
         try:
             dsp_list = self.config['resources']['dsp']

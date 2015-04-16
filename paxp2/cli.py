@@ -10,11 +10,12 @@
 import argparse
 import logging
 import logging.config
-import paxp2
 import yaml
 
 
 def main():
+
+    import paxp2
 
     parser = argparse.ArgumentParser()
     parser.add_argument('-v', '--version', action='version', version=paxp2.__version__)
@@ -27,8 +28,11 @@ def main():
     log.setdefault('version', 1)
     logging.config.dictConfig(log)
 
-    app = paxp2.App(conf=conf)
-    app.run(debug=conf.get('debug', False))
+    from paxp2.flaskapp import App
+
+    host, port = conf.get('bind', '127.0.0.0:5000').split(':')
+    app = App(conf=conf)
+    app.run(host=host, port=int(port), debug=conf.get('debug', False))
 
 
 if __name__ == '__main__':

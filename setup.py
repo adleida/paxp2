@@ -33,7 +33,6 @@ setuptools.setup(
     packages=['paxp2'],
     package_data={'paxp2': data},
     include_package_data=True,
-    zip_safe=False,
     platforms='any',
     entry_points='''
         [console_scripts]
@@ -46,4 +45,11 @@ setuptools.setup(
         'requests',
         'toolz',
     ],
+    classifiers=[
+        'Development Status :: 0 - Alpha',
+        'Environment :: Web Environment',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python :: 3.4',
+        'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+    ]
 )
