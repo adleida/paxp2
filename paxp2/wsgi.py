@@ -7,13 +7,21 @@
     This module implements the entrypoint for wsgi.
 '''
 
-import paxp2
+import logging
+import logging.config
 import sys
 import yaml
 
-# FIXME: logging doesn't work
-
+# cfg
 config = sys.argv[1]
 conf = yaml.load(open(config))
-app = paxp2.App(conf=conf)
+
+# log
+log = conf.get('logging', {})
+log.setdefault('version', 1)
+logging.config.dictConfig(log)
+
+# app
+from paxp2.flaskapp import App
+app = App(conf=conf)
 

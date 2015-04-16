@@ -27,13 +27,12 @@ def index():
 @validate('click')
 def click():
 
-    res = app.engine.handle(request.json)
+    res = app.engine.handle(request.get_json())
     return res
 
 
-@validate('notice')
-def notice():
+def stats():
 
-    data = {"id": "123456"}
-    return data
+    data = app.engine.stats.get_stats()
+    return jsonify(data)
 

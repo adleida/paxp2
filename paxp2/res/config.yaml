@@ -1,9 +1,14 @@
 bind: 127.0.0.1:5000
-oplog: mongodb://localhost:27017/paxp2.oplog
+
+#oplog: mongodb://localhost:27017/paxp2.oplog
+
 resources:
   dsp:
   - id: dsp-0
     name: DSP-0
+    burl: http://localhost:8089/v1/bid/
+  - id: dsp-1
+    name: DSP-1
     burl: http://localhost:8089/v1/bid/
 
 logging:

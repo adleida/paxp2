@@ -67,5 +67,8 @@ def dump_json(data):
 
 def wget_json(url):
 
-    return requests.get(url).json()
+    if os.path.exists(url):
+        return json.load(open(url))
+    else:
+        return requests.get(url).json()
 
