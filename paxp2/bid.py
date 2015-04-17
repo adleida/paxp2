@@ -13,6 +13,7 @@ import requests
 import time
 import uuid
 from concurrent.futures import ThreadPoolExecutor
+from toolz import dicttoolz
 from .stats import Stats
 from . import utils
 
@@ -208,13 +209,6 @@ class BidEngine(object):
             msg.set_empty_response()
             logger.debug('resolution failed')
 
-    def cleanup(self, data):
-
-        result = copy.deepcopy(data)
-        del result['did']
-        del result['nurl']
-        return result
-
     def notice(self, msg):
 
         results = msg.get_results()
@@ -259,7 +253,7 @@ class Resolver(object):
         losers = players - winners
 
         result = {
-            'adm': [i['adm'] for i in slots],
+            'adm': [dicttoolz.keyfilter(lambda x: x not in ['price'], i['adm']) for i in slots],
             'is_test': 0,
         }
 
