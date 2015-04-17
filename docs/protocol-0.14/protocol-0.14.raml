@@ -28,44 +28,57 @@ resourceTypes:
             body:
               application/json:
 
+
 title: PAXP
 baseUri: http://adx.adleida.com/{version}
-version: v1
+version: v4
 
 /clk/:
   post:
     body:
       application/json:
         schema: !include schema/clk-request-schema.json
-        example: !include example/clk-request-successful-example.json
+        example: !include example/sdk/clk-request-example.json
     responses:
       200:
         body:
           application/json:
             schema: !include schema/clk-response-schema.json
-            example: !include example/clk-response-successful-example.json
+            example: !include example/sdk/clk-response-successful-example.json
   type:
     code:
-      global-desc: "In order to request to dsp that sended by sdk"
-      local-desc: "Confirm token that verify action with sdk"
+      global-desc: "in order to request to dsp that sended by sdk"
+      local-desc: "confirm token that verify action with sdk"
       token: "f1fda941-0996-4a58-8b99-45fe1dea3202"
+
+/result/:
+  post:
+    body:
+      application/json:
+        schema: !include schema/result-schema.json
+        example: !include example/sdk/result-example.json
+  type:
+    code:
+      global-desc: "send result to dsp at real time"
+      local-desc: "confirm token that verify action with dsp when send result"
+      token: "032eec98-90fc-4c2f-be31-7b1b329a71b9"
 
 /bid/:
   post:
     body:
       application/json:
         schema: !include schema/bid-request-schema.json
-        example: !include example/bid-request-example.json
+        example: !include example/dsp/bid-request-example.json
     responses:
       200:
         body:
           application/json:
             schema: !include schema/bid-response-schema.json
-            example: !include example/bid-response-example.json
+            example: !include example/dsp/bid-response-successful-example.json
   type:
     code:
       global-desc: "redirect to dsp and compute bid result from response"
-      local-desc: "Confirm token that verify action with dsp"
+      local-desc: "confirm token that verify action with dsp"
       token: "a0a44ebf-0ef6-45b4-a7b2-eb47370756ce"
 
 /notice/:
@@ -73,9 +86,9 @@ version: v1
     body:
       application/json:
         schema: !include schema/notice-schema.json
-        example: !include example/notice-example.json
+        example: !include example/dsp/notice-example.json
   type:
     code:
-      global-desc: "Notice to dsp after send result to sdk"
-      local-desc: "Confirm token that verify action with dsp when noticing"
+      global-desc: "notice to dsp after send result to sdk"
+      local-desc: "confirm token that verify action with dsp when noticing"
       token: "fb1b968d-7087-46b5-8fd7-9b96fcc52a81"
