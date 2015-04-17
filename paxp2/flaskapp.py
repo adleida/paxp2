@@ -56,10 +56,11 @@ class App(Flask):
             dsp_list = self.config['resources']['dsp']
             if isinstance(dsp_list, str):
                 dsp_list = utils.wget_json(dsp_list)
+            assert isinstance(dsp_list, list)
         except:
             logger.error('cannot load dsp-list')
             dsp_list = []
-        mgr = bid.BidAgentManager(dsp_list)
+        mgr = bid.BidAgentManager(dsp_list, self.config.get('timeout', 0.5))
         self.engine = bid.BidEngine(mgr)
 
 

@@ -174,14 +174,14 @@ class BidEngine(object):
             results = msg.get_results()
             logger.debug('try to resolve %d results', len(results))
             result = list(results.values())[0]
-            result = self.refine(result)
+            result = self.cleanup(result)
             msg.set_response(result)
             logger.debug('resolution succeed')
         except:
             msg.set_empty_response()
             logger.debug('resolution failed')
 
-    def refine(self, data):
+    def cleanup(self, data):
 
         result = copy.deepcopy(data)
         result['did'] = 'adleida ad exchange'
@@ -191,4 +191,10 @@ class BidEngine(object):
     def notice(self, msg):
 
         logger.debug('send bid-notice to %d DSPs', len(msg.get_results()))
+
+        response = msg.get_response()
+        results = msg.get_results()
+
+        for k, v in results:
+            pass
 

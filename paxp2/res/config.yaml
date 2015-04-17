@@ -1,6 +1,7 @@
 bind: 127.0.0.1:5000
 
 #oplog: mongodb://localhost:27017/paxp2.oplog
+#stats: redis://localhost:6379/0
 
 resources:
   dsp:

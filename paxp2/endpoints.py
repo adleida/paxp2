@@ -24,7 +24,7 @@ def index():
     return jsonify(data)
 
 
-@validate('click')
+@validate('clk')
 def click():
 
     res = app.engine.handle(request.get_json())
