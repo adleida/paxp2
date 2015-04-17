@@ -52,7 +52,7 @@ def check_schema(obj, schema):
         schema.validate(obj)
         return True, None
     except Exception as ex:
-        return False, ex.message
+        return False, Exception(ex.message)
 
 
 def load_json(data):

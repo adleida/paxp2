@@ -61,7 +61,8 @@ class App(Flask):
             logger.error('cannot load dsp-list')
             dsp_list = []
         mgr = bid.BidAgentManager(dsp_list, self.config.get('timeout', 0.5))
-        self.engine = bid.BidEngine(mgr)
+        ntr = bid.BidNoticer(self.config.get('timeout', 0.5))
+        self.engine = bid.BidEngine(mgr, ntr)
 
 
 class Paxp2WSGIRequestHandler(WSGIRequestHandler):

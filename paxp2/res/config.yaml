@@ -7,10 +7,13 @@ resources:
   dsp:
   - id: dsp-0
     name: DSP-0
-    burl: http://localhost:8089/v1/bid/
+    burl: http://localhost:8800/bid/
   - id: dsp-1
     name: DSP-1
-    burl: http://localhost:8089/v1/bid/
+    burl: http://localhost:8801/bid/
+  - id: dsp-2
+    name: DSP-2
+    burl: http://localhost:8802/bid/
 
 logging:
   formatters:
