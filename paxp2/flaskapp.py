@@ -55,7 +55,7 @@ class App(Flask):
         try:
             dsp_list = self.config['resources']['dsp']
             if isinstance(dsp_list, str):
-                dsp_list = utils.wget_json(dsp_list)
+                dsp_list = utils.wget_obj(dsp_list)
             assert isinstance(dsp_list, list)
         except:
             logger.error('cannot load dsp-list')

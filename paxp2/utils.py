@@ -65,10 +65,16 @@ def dump_json(data):
     return json.dumps(data, indent=2, ensure_ascii=False)
 
 
-def wget_json(url):
+def wget_obj(url):
 
     if os.path.exists(url):
-        return json.load(open(url))
+        _, ext = os.path.splitext(url)
+        if ext in ['.json']:
+            return json.load(open(url))
+        elif ext in ['.yaml', '.yml']:
+            return yaml.load(open(url))
+        else:
+            raise Exception('cannot detect resource type')
     else:
-        return requests.get(url).json()
+        return requests.get(url, timeout=3).json()
 
