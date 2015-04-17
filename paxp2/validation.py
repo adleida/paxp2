@@ -9,11 +9,29 @@
 
 import logging
 from .utils import check_schema
+from .errorcode import ERROR_CODE_TABLE
 from flask import request, jsonify
 from functools import wraps
 
 
 logger = logging.getLogger(__name__)
+
+
+def err_msg(code, ex=None):
+
+    msg = {
+        "adm": [],
+        "is_test": 0,
+        "error": {
+            "code": code,
+            "detail": ERROR_CODE_TABLE.get(code, '')
+        }
+    }
+
+    if ex:
+        msg['error']['detail'] += '({})'.format(ex)
+
+    return msg
 
 
 def validate(schema):
@@ -37,13 +55,13 @@ def validate(schema):
                         logger.debug('response is ok')
                     else:
                         logger.warn('response is bad')
-                        res = {'code': 2, 'detail': str(ex_2)}
+                        res = err_msg(2, ex_2)
                 else:
                     logger.warn('request is bad')
-                    res = {'code': 1, 'detail': str(ex_1)}
+                    res = err_msg(1, ex_1)
             except Exception as ex_3:
                 logger.warn('unknown error')
-                res = {'code': 3, 'detail': str(ex_3)}
+                res = err_msg(-1, ex_3)
 
             return jsonify(res)
         

@@ -20,6 +20,7 @@ clean:
 	find . -name '*.pyc' -delete
 	find . -name '.*~' -delete
 	find . -name '__pycache__' -delete
+	find . -name '*.log' -delete
 
 pack:
 	python setup.py sdist --formats=gztar
