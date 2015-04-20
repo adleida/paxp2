@@ -28,7 +28,12 @@ class BidMessage(object):
         return BidMessage(request_data)
 
     def __init__(self, request_data):
-        self.uuid = request_data['id'] = str(uuid.uuid4())
+
+        if 'id' in request_data:
+            self.uuid = request_data['id']
+        else:
+            self.uuid = request_data['id'] = str(uuid.uuid4())
+
         self.request_data = request_data
         self.start_time = time.time()
         self.freezed = False

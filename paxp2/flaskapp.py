@@ -12,7 +12,7 @@ import logging
 import paxp2
 import yaml
 from flask import Flask
-from . import bid, endpoints, utils
+from . import bid, endpoints, oplog, utils
 from werkzeug.serving import WSGIRequestHandler
 
 
@@ -31,6 +31,7 @@ class App(Flask):
         self.load_config()
         self.init_rules()
         self.init_engine()
+        self.init_oplog()
 
     def run(self, host=None, port=None, debug=None, **options):
 
@@ -63,6 +64,11 @@ class App(Flask):
         mgr = bid.BidAgentManager(dsp_list, self.config.get('timeout', 0.5))
         ntr = bid.BidNoticer(self.config.get('timeout', 0.5))
         self.engine = bid.BidEngine(mgr, ntr)
+
+    def init_oplog(self):
+
+        mongo_uri = self.config.get('oplog')
+        self.oplog = oplog.OpLogger(mongo_uri)
 
 
 class Paxp2WSGIRequestHandler(WSGIRequestHandler):

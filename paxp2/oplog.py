@@ -7,21 +7,34 @@
     This module implements the oplog
 '''
 
-from flask import current_app as app, request
 import logging
+import pymongo
+import time
 
 
 logger = logging.getLogger(__name__)
 
 
-def oplog_push(resource, op):
+class OpLogger(object):
 
-    entry = {
-        'rs': resource,
-        'id': None,
-        'op': op,
-        'ip': request.remote_addr
-    }
+    def __init__(self, uri):
 
-    logger.debug('%s', entry)
+        try:
+            parsed = pymongo.uri_parser.parse_uri(uri)
+            db, coll = parsed['database'], parsed['collection']
+            host, port = parsed['nodelist'][0]
+            self.mdb = pymongo.MongoClient(host=host, port=port)[db][coll]
+        except:
+            self.mdb = None
+
+    def log(self, ip, id, req, res):
+
+        if self.mdb:
+            self.mdb.insert_one({
+                'ip': ip,
+                'id': id,
+                'rx': req,
+                'tx': res,
+                'ut': time.time(),
+            })
 

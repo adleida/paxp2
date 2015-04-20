@@ -9,6 +9,7 @@
 
 import paxp2
 import time
+import uuid
 from flask import request, jsonify, current_app as app
 from .validation import validate
 
@@ -27,7 +28,14 @@ def index():
 @validate('clk')
 def click():
 
-    res = app.engine.handle(request.get_json())
+    ip = request.remote_addr
+    id = str(uuid.uuid4())
+
+    req = request.get_json()
+    req['id'] = id
+    res = app.engine.handle(req)
+    app.oplog.log(ip=ip, id=id, req=req, res=res)
+
     return res
 
 
