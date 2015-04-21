@@ -253,6 +253,9 @@ class Resolver(object):
         count = request['adunit']['param']['count']
         slots = slots[:count]
 
+        floor = request['adunit']['floor']
+        slots = list(filter(lambda x: x['adm']['price'] >= floor, slots))
+
         players = set(results.keys())
         winners = set([i['did'] for i in slots])
         losers = players - winners
