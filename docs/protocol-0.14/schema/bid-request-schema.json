@@ -17,7 +17,6 @@
     "adunit":{  
       "type":"object",
       "required":[  
-        "id",
         "type",
         "floor",
         "param"
@@ -121,14 +120,7 @@
       }
     },
     "cur":{  
-      "type":"array",
-      "minItems": 1,
-      "maxItems": 1,
-      "uniqueItems": true,
-      "items":{  
-        "type":"string",
-        "enum":["CNY"]
-      }
+      "type":"string"
     },
     "deal_id":{  
       "type":"string"
