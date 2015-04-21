@@ -41,6 +41,7 @@ setuptools.setup(
     install_requires=[
         'flask',
         'jsonschema',
+        'pymongo',
         'pyyaml',
         'requests',
         'toolz',

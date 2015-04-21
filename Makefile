@@ -22,10 +22,12 @@ clean:
 	find . -name '__pycache__' -delete
 	find . -name '*.log' -delete
 
-pack:
+pack: clean
 	python setup.py sdist --formats=gztar
 
-deploy: pack
+upload: pack
 	scp dist/$(PKG) $(HOST):$(DIR)
+
+deploy: upload
 	ssh 119 "sudo pip install $(DIR)/$(PKG)"
 
