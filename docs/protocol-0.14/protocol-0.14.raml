@@ -37,13 +37,13 @@ version: v4
   post:
     body:
       application/json:
-        schema: !include schema/clk-request-schema.json
+        schema: !include ../../paxp2/res/clk-request-schema.json
         example: !include example/sdk/clk-request-example.json
     responses:
       200:
         body:
           application/json:
-            schema: !include schema/clk-response-schema.json
+            schema: !include ../../paxp2/res/clk-response-schema.json
             example: !include example/sdk/clk-response-successful-example.json
   type:
     code:
@@ -55,7 +55,7 @@ version: v4
   post:
     body:
       application/json:
-        schema: !include schema/result-schema.json
+        schema: !include ../../paxp2/res/result-schema.json
         example: !include example/sdk/result-example.json
   type:
     code:
@@ -67,13 +67,13 @@ version: v4
   post:
     body:
       application/json:
-        schema: !include schema/bid-request-schema.json
+        schema: !include ../../paxp2/res/bid-request-schema.json
         example: !include example/dsp/bid-request-example.json
     responses:
       200:
         body:
           application/json:
-            schema: !include schema/bid-response-schema.json
+            schema: !include ../../paxp2/res/bid-response-schema.json
             example: !include example/dsp/bid-response-successful-example.json
   type:
     code:
@@ -85,7 +85,7 @@ version: v4
   post:
     body:
       application/json:
-        schema: !include schema/notice-schema.json
+        schema: !include ../../paxp2/res/notice-schema.json
         example: !include example/dsp/notice-example.json
   type:
     code:
