@@ -24,7 +24,7 @@
 │   │       └── result-example.json
 │   ├── protocol-0.14.html
 │   ├── protocol-0.14.raml
-│   └── schema
+│   └── schema (该目录下内容已经转移至 ../../../paxp2/res/*.json)
 │       ├── bid-request-schema.json
 │       ├── bid-response-schema.json
 │       ├── clk-request-schema.json
