@@ -24,12 +24,15 @@ class OpLogger(object):
             db, coll = parsed['database'], parsed['collection']
             host, port = parsed['nodelist'][0]
             self.mdb = pymongo.MongoClient(host=host, port=port)[db][coll]
+            count = self.mdb.find().count()
+            logger.info('connect to oplog: %s (%d)', uri, count)
         except:
             self.mdb = None
 
     def log(self, ip, id, req, res):
 
         if self.mdb:
+            logger.debug('insert oplog')
             self.mdb.insert_one({
                 'ip': ip,
                 'id': id,
