@@ -1,8 +1,8 @@
 .PHONY: test run wsgi deploy upload build
 
 PKG=$(shell python setup.py --fullname).tar.gz
-HOST=119
-DIR=/tmp
+HOST=114
+DIR=.
 
 all: clean test
 
