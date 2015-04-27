@@ -14,12 +14,12 @@
     },
     "adm":{  
       "type":"array",
-      "required":[  
-        "id",
-        "data",
-        "price"
-      ],
       "items":{  
+        "required":[  
+          "id",
+          "data",
+          "price"
+        ],
         "type":"object",
         "properties":{  
           "id":{  
