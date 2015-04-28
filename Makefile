@@ -1,8 +1,8 @@
 .PHONY: test run wsgi deploy upload build
 
-PKG=$(shell python setup.py --fullname).tar.gz
-HOST=114
-DIR=.
+PKG = $(shell python setup.py --fullname).tar.gz
+HOSTS = python@114
+DIR = .
 
 all: clean test
 
@@ -26,7 +26,7 @@ pack: clean
 	python setup.py sdist --formats=gztar
 
 upload: pack
-	scp dist/$(PKG) $(HOST):$(DIR)
+	for HOST in $(HOSTS); do scp dist/$(PKG) $$HOST:$(DIR); done
 
 deploy: upload
 	ssh 119 "sudo pip install $(DIR)/$(PKG)"
