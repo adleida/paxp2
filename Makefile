@@ -26,7 +26,11 @@ pack: clean
 	python setup.py sdist --formats=gztar
 
 upload: pack
-	for HOST in $(HOSTS); do scp dist/$(PKG) $$HOST:$(DIR); done
+	for HOST in $(HOSTS); \
+	do \
+	    scp dist/$(PKG) $$HOST:$(DIR); \
+	    ssh $$HOST 'ln -s $(DIR)/$(PKG) $(DIR)/paxp2-latest.tar.gz'; \
+	done
 
 deploy: upload
 	ssh 119 "sudo pip install $(DIR)/$(PKG)"
