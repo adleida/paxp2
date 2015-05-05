@@ -138,9 +138,16 @@ class BidAgent(object):
             raise Exception('"id" mismatch')
 
         ok, ex = utils.check_schema(data, 'bid-response')
+        data = self._clean(data)
 
         if not ok:
             raise ex
+
+    def _clean(self, data):
+
+        item_check = lambda x: utils.check_schema(x, 'bid-response-item')[0]
+        data['adm'] = list(filter(item_check, data['adm']))
+        return data
 
 
 class BidAgentManager(object):

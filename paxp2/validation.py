@@ -60,7 +60,7 @@ def validate(schema):
                     logger.warn('request is bad')
                     res = err_msg(1, ex_1)
             except Exception as ex_3:
-                logger.warn('unknown error')
+                logger.warn('unknown error: %s', ex_3)
                 res = err_msg(-1, ex_3)
 
             return jsonify(res)
