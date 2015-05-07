@@ -39,6 +39,12 @@ def click():
     return res
 
 
+def reload():
+
+    ok = app.engine.reload()
+    return jsonify({'reload': ok})
+
+
 def stats():
 
     data = app.engine.stats.get_stats()

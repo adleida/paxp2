@@ -49,18 +49,13 @@ class App(Flask):
         self.add_url_rule(rule='/clk/', view_func=endpoints.click, methods=['POST'])
         self.add_url_rule(rule='/stats', view_func=endpoints.stats, methods=['GET'])
         self.add_url_rule(rule='/stats/', view_func=endpoints.stats, methods=['GET'])
+        self.add_url_rule(rule='/reload', view_func=endpoints.reload, methods=['POST'])
+        self.add_url_rule(rule='/reload/', view_func=endpoints.reload, methods=['POST'])
         self.error_handler_spec[None][404] = lambda error: endpoints.index()
 
     def init_engine(self):
 
-        try:
-            dsp_list = self.config['resources']['dsp']
-            if isinstance(dsp_list, str):
-                dsp_list = utils.wget_obj(dsp_list)
-            assert isinstance(dsp_list, list)
-        except:
-            logger.error('cannot load dsp-list')
-            dsp_list = []
+        dsp_list = self.config['resources']['dsp']
         mgr = bid.BidAgentManager(dsp_list, self.config.get('timeout', 0.5))
         ntr = bid.BidNoticer(self.config.get('timeout', 0.5))
         self.engine = bid.BidEngine(mgr, ntr)

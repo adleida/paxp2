@@ -29,7 +29,7 @@ upload: pack
 	for HOST in $(HOSTS); \
 	do \
 	    scp dist/$(PKG) $$HOST:$(DIR); \
-	    ssh $$HOST 'ln -s $(DIR)/$(PKG) $(DIR)/paxp2-latest.tar.gz'; \
+	    ssh $$HOST 'ln -sf $(DIR)/$(PKG) $(DIR)/paxp2-latest.tar.gz'; \
 	done
 
 deploy: upload

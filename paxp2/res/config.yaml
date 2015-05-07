@@ -4,6 +4,7 @@ oplog: mongodb://localhost:27017/paxp2.oplog
 #stats: redis://localhost:6379/0
 
 resources:
+# dsp: http://localhost:8808/dsp/
   dsp:
   - id: dsp-0
     name: DSP-0

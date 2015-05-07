@@ -152,11 +152,34 @@ class BidAgent(object):
 
 class BidAgentManager(object):
 
-    def __init__(self, agents, timeout=0.5):
+    def __init__(self, agents_list, timeout=0.5):
 
         logger.info('init bid-agent-manager (timeout=%fs)', timeout)
         self.timeout = timeout
-        self.agents = [BidAgent(self, **i) for i in agents]
+
+        if isinstance(agents_list, str):
+            self.agents_url = agents_list
+            self.reload()
+        else:
+            self.agents = [BidAgent(self, **i) for i in agents_list]
+
+    def reload(self):
+
+        logger.info('reload bid-agents')
+        if hasattr(self, 'agents_url'):
+            try:
+                agents_list = utils.wget_obj(self.agents_url)
+                assert isinstance(agents_list, list)
+                self.agents = [BidAgent(self, **i) for i in agents_list]
+                logger.info('reload ok')
+                return True
+            except:
+                self.agents = []
+                logger.error('reload failed')
+                return False
+        else:
+            logger.warning('reload ignored')
+            return None
 
     def sendall(self, msg):
 
@@ -195,6 +218,10 @@ class BidEngine(object):
         self.noticer = noticer
         self.stats = Stats()
         self.stats.set_value('started_time', time.time())
+
+    def reload(self):
+
+        return self.manager.reload()
 
     def handle(self, req):
 
