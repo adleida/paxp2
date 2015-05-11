@@ -1,0 +1,11 @@
+uwsgi:
+  http: 127.0.0.1:5000
+  stats: 127.0.0.1:5001
+# venv: /Users/kev/.virtualenvs/paxp2
+  wsgi: paxp2.wsgi:app
+  pyargv: /etc/paxp2/paxp2.yaml
+  req-logger: file:/var/paxp2/access.log
+  logger: file:/var/paxp2/error.log
+  pidfile: /run/paxp2.pid
+  workers: 4
+  master: true

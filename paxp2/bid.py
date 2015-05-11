@@ -123,7 +123,7 @@ class BidAgent(object):
 
         try:
             return requests.post(self.burl, json=data, timeout=self.mgr.timeout).json()
-        except:
+        except Exception as ex:
             raise Exception('network error')
 
     def _check(self, data, msg):
