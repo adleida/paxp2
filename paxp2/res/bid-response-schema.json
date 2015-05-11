@@ -13,7 +13,49 @@
       "type": "string"
     },
     "adm": {
-      "type": "array"
+      "type": "array",
+      "item": {
+        "type": "object",
+        "required": [
+          "id",
+          "data",
+          "price"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "img": {
+                "type": "string"
+              },
+              "text": {
+                "type": "string"
+              },
+              "app_url": {
+                "type": "string"
+              }
+            }
+          },
+          "price": {
+            "type": "number"
+          },
+          "click_through_url": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tracking_url": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
     },
     "did": {
       "type": "string"

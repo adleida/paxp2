@@ -11,6 +11,7 @@ import copy
 import logging
 import requests
 import time
+import urllib
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 from toolz import dicttoolz
@@ -137,8 +138,8 @@ class BidAgent(object):
         if not data.get('id') == msg.uuid:
             raise Exception('"id" mismatch')
 
-        ok, ex = utils.check_schema(data, 'bid-response')
         data = self._clean(data)
+        ok, ex = utils.check_schema(data, 'bid-response')
 
         if not ok:
             raise ex
@@ -146,31 +147,46 @@ class BidAgent(object):
     def _clean(self, data):
 
         item_check = lambda x: utils.check_schema(x, 'bid-response-item')[0]
-        data['adm'] = list(filter(item_check, data['adm']))
+        items = []
+        for item in filter(item_check, data['adm']):
+            adm_url = urllib.parse.urljoin(self.mgr.adm_base, item['id'])
+            try:
+                obj = requests.get(adm_url).json()
+                # FIXME: should not hardcode type==1
+                if obj['id'] == item['id'] and obj['did'] == self.id and obj['type'] == 1:
+                    logger.debug('fetch adm: %s => %s (good)', self.id, item['id'])
+                    item.update(data=obj['data'])
+                    items.append(item)
+                else:
+                    logger.warning('fetch adm: %s => %s (bad)', self.id, item['id'])
+            except:
+                logger.error('fetch adm: %s => %s (error)', self.id, item['id'])
+        data['adm'] = items
         return data
 
 
 class BidAgentManager(object):
 
-    def __init__(self, agents_list, timeout=0.5):
+    def __init__(self, dsp_list, adm_base, timeout=0.5):
 
         logger.info('init bid-agent-manager (timeout=%fs)', timeout)
+        self.adm_base = adm_base
         self.timeout = timeout
 
-        if isinstance(agents_list, str):
-            self.agents_url = agents_list
+        if isinstance(dsp_list, str):
+            self.dsp_url = dsp_list
             self.reload()
         else:
-            self.agents = [BidAgent(self, **i) for i in agents_list]
+            self.agents = [BidAgent(self, **i) for i in dsp_list]
 
     def reload(self):
 
         logger.info('reload bid-agents')
-        if hasattr(self, 'agents_url'):
+        if hasattr(self, 'dsp_url'):
             try:
-                agents_list = utils.wget_obj(self.agents_url)
-                assert isinstance(agents_list, list)
-                self.agents = [BidAgent(self, **i) for i in agents_list]
+                dsp_list = utils.wget_obj(self.dsp_url)
+                assert isinstance(dsp_list, list)
+                self.agents = [BidAgent(self, **i) for i in dsp_list]
                 logger.info('reload ok')
                 return True
             except:
