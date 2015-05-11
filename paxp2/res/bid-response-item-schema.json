@@ -3,7 +3,6 @@
   "type": "object",
   "required": [
     "id",
-    "data",
     "price"
   ],
   "properties": {
