@@ -32,7 +32,7 @@ logging:
       class: logging.handlers.RotatingFileHandler
       formatter: default
       level: INFO
-      filename: paxp2.log
+      filename: /var/log/paxp2/main.log
       maxBytes: 1000000
       backupCount: 3
   loggers:
