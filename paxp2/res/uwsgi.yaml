@@ -9,3 +9,4 @@ uwsgi:
   pidfile: /run/paxp2.pid
   workers: 4
   master: true
+  pidfile: /var/run/uwsgi.pid

@@ -1,7 +1,7 @@
 .PHONY: test run wsgi deploy upload build
 
 PKG = $(shell python setup.py --fullname).tar.gz
-HOSTS = python@114
+HOSTS = python@114 ubuntu@ucloud
 DIR = .
 
 all: clean test
