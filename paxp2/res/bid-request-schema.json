@@ -132,7 +132,7 @@
         "latitude": {
           "type": "number"
         },
-        "longtitude": {
+        "longitude": {
           "type": "number"
         }
       }
