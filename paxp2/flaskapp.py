@@ -58,7 +58,7 @@ class App(Flask):
         dsp_list = self.config['resources']['dsp']
         adm_url = self.config['resources']['adm']
         mgr = bid.BidAgentManager(dsp_list, adm_url, self.config.get('timeout', 0.5))
-        ntr = bid.BidNoticer(self.config.get('timeout', 0.5))
+        ntr = bid.BidNoticer(self.config.get('notice_timeout', 0.5))
         self.engine = bid.BidEngine(mgr, ntr)
 
     def init_oplog(self):

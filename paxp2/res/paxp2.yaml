@@ -1,5 +1,6 @@
 bind: 127.0.0.1:5000
 timeout: 0.500
+notice_timeout: 0.250
 
 oplog: mongodb://localhost:27017/paxp2.oplog
 #stats: redis://localhost:6379/0
@@ -21,7 +22,7 @@ resources:
 logging:
   formatters:
     default:
-      format: '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+      format: '%(asctime)s.%(msecs)03d [%(levelname)s] %(name)s: %(message)s'
       datefmt: '%FT%T'
   handlers:
     console:
