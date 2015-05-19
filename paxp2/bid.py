@@ -151,7 +151,7 @@ class BidAgent(object):
         for item in filter(item_check, data['adm']):
             adm_url = urllib.parse.urljoin(self.mgr.adm_base, item['id'])
             try:
-                obj = requests.get(adm_url).json()
+                obj = requests.get(adm_url, timeout=self.mgr.timeout).json()
                 # FIXME: should not hardcode type==1
                 if obj['id'] == item['id'] and obj['did'] == self.id and obj['type'] == 1:
                     logger.debug('fetch adm: %s => %s (good)', self.id, item['id'])
