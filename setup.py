@@ -45,9 +45,10 @@ setuptools.setup(
         'pyyaml',
         'requests',
         'toolz',
+        'uwsgi',
     ],
     classifiers=[
-        'Development Status :: 0 - Alpha',
+        'Development Status :: 1 - Beta',
         'Environment :: Web Environment',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3.4',
