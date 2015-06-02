@@ -3,7 +3,8 @@ timeout: 0.500
 notice_timeout: 0.250
 
 oplog: mongodb://localhost:27017/paxp2.oplog
-#stats: redis://localhost:6379/0
+
+redir_url: http://redir.adleida.com/?url=
 
 resources:
   adm: http://localhost:6001/adm/
@@ -33,7 +34,7 @@ logging:
       class: logging.handlers.RotatingFileHandler
       formatter: default
       level: INFO
-      filename: /var/log/paxp2/main.log
+      filename: paxp2.log
       maxBytes: 1000000
       backupCount: 3
   loggers:

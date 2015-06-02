@@ -56,8 +56,12 @@ class App(Flask):
     def init_engine(self):
 
         dsp_list = self.config['resources']['dsp']
-        adm_url = self.config['resources']['adm']
-        mgr = bid.BidAgentManager(dsp_list, adm_url, self.config.get('timeout', 0.5))
+        adm_base = self.config['resources']['adm']
+        mgr = bid.BidAgentManager(
+            dsp_list,
+            adm_base,
+            self.config.get('timeout', 0.5),
+            self.config.get('redir_url', None))
         ntr = bid.BidNoticer(self.config.get('notice_timeout', 0.5))
         self.engine = bid.BidEngine(mgr, ntr)
 

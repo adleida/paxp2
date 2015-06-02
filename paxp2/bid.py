@@ -114,7 +114,8 @@ class BidAgent(object):
         try:
             data = msg.get_request()
             result = self._send(data)
-            self._check(result, msg)
+            result = self._check(result, msg)
+            result = self._redir(result)
             msg.add_result(result)
             logger.debug('recv bid-response from: %s (ok)', self.id)
         except Exception as ex:
@@ -125,7 +126,7 @@ class BidAgent(object):
         try:
             return requests.post(self.burl, json=data, timeout=self.mgr.timeout).json()
         except Exception as ex:
-            raise Exception('network error')
+            raise Exception(ex.__class__.__name__)
 
     def _check(self, data, msg):
 
@@ -143,6 +144,8 @@ class BidAgent(object):
 
         if not ok:
             raise ex
+        else:
+            return data
 
     def _clean(self, data):
 
@@ -164,14 +167,30 @@ class BidAgent(object):
         data['adm'] = items
         return data
 
+    def _redir(self, data):
+
+        if not self.mgr.redir_url:
+            return data
+
+        rewrite = lambda url: '{}{}'.format(
+            self.mgr.redir_url,
+            urllib.parse.quote(url, safe=''))
+
+        for adm in data['adm']:
+            adm['click_through_url'] = list(map(rewrite, adm['click_through_url']))
+            adm['tracking_url'] = list(map(rewrite, adm['tracking_url']))
+
+        return data
+
 
 class BidAgentManager(object):
 
-    def __init__(self, dsp_list, adm_base, timeout=0.5):
+    def __init__(self, dsp_list, adm_base, timeout=0.5, redir_url=None):
 
-        logger.info('init bid-agent-manager (timeout=%fs)', timeout)
         self.adm_base = adm_base
         self.timeout = timeout
+        self.redir_url = redir_url
+        logger.info('init bid-agent-manager (timeout=%fs, redir=%s)', timeout, redir_url)
 
         if isinstance(dsp_list, str):
             self.dsp_url = dsp_list
