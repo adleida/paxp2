@@ -63,7 +63,7 @@ def validate(schema):
                 logger.warn('unknown error: %s', ex_3)
                 res = err_msg(-1, ex_3)
 
-            return jsonify(res)
+            return jsonify(res), 200, {'Access-Control-Allow-Origin': '*'}
         
         return decorated
 
