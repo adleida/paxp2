@@ -177,8 +177,10 @@ class BidAgent(object):
             urllib.parse.quote(url, safe=''))
 
         for adm in data['adm']:
-            adm['click_through_url'] = list(map(rewrite, adm['click_through_url']))
-            adm['tracking_url'] = list(map(rewrite, adm['tracking_url']))
+            if 'click_through_url' in adm:
+                adm['click_through_url'] = list(map(rewrite, adm['click_through_url']))
+            if 'tracking_url' in adm:
+                adm['tracking_url'] = list(map(rewrite, adm['tracking_url']))
 
         return data
 
