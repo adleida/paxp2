@@ -45,8 +45,8 @@ class App(Flask):
     def init_rules(self):
 
         self.add_url_rule(rule='/', view_func=endpoints.index, methods=['GET'])
-        self.add_url_rule(rule='/clk', view_func=endpoints.click, methods=['POST'])
-        self.add_url_rule(rule='/clk/', view_func=endpoints.click, methods=['POST'])
+        self.add_url_rule(rule='/clk', view_func=endpoints.click, methods=['POST', 'OPTIONS'])
+        self.add_url_rule(rule='/clk/', view_func=endpoints.click, methods=['POST', 'OPTIONS'])
         self.add_url_rule(rule='/stats', view_func=endpoints.stats, methods=['GET'])
         self.add_url_rule(rule='/stats/', view_func=endpoints.stats, methods=['GET'])
         self.add_url_rule(rule='/reload', view_func=endpoints.reload, methods=['POST'])

@@ -44,6 +44,13 @@ def validate(schema):
         @wraps(f)
         def decorated(*args, **kwargs):
 
+            if request.method == 'OPTIONS':
+                return '', 200, {
+                                    'Access-Control-Allow-Origin': '*',
+                                    'Access-Control-Allow-Headers': 'Content-Type',
+                                    'Access-Control-Allow-Methods': 'POST'
+                                }
+
             try:
                 req = request.get_json()
                 ok_1, ex_1 = check_schema(req, req_schema)
