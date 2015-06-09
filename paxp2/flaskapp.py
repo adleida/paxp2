@@ -29,6 +29,7 @@ class App(Flask):
         name = kwargs.pop('name', __package__)
         super(App, self).__init__(name, **kwargs)
         self.load_config()
+        self.init_token()
         self.init_rules()
         self.init_engine()
         self.init_oplog()
@@ -41,6 +42,10 @@ class App(Flask):
     def load_config(self):
         
         self.config.update(self.conf)
+
+    def init_token(self):
+
+        self.token = self.config.get('token')
 
     def init_rules(self):
 

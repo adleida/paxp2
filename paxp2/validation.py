@@ -10,7 +10,6 @@
 import logging
 from .utils import check_schema
 from .errorcode import ERROR_CODE_TABLE
-from flask import request, jsonify
 from functools import wraps
 
 
@@ -34,45 +33,28 @@ def err_msg(code, ex=None):
     return msg
 
 
-def validate(schema):
+def check_input(req):
 
-    req_schema = '{}-request'.format(schema)
-    res_schema = '{}-response'.format(schema)
+    ok, ex = check_schema(req, 'clk-request')
+    if ok:
+        return True, None
+    else:
+        return False, ex
 
-    def fdec(f):
 
-        @wraps(f)
-        def decorated(*args, **kwargs):
+def check_output(res):
 
-            if request.method == 'OPTIONS':
-                return '', 200, {
-                                    'Access-Control-Allow-Origin': '*',
-                                    'Access-Control-Allow-Headers': 'Content-Type',
-                                    'Access-Control-Allow-Methods': 'POST'
-                                }
+    ok, ex = check_schema(res, 'clk-response')
+    if ok:
+        return True, None
+    else:
+        return False, ex
 
-            try:
-                req = request.get_json()
-                ok_1, ex_1 = check_schema(req, req_schema)
-                if ok_1:
-                    logger.debug('requset is ok')
-                    res = f(*args, **kwargs)
-                    ok_2, ex_2 = check_schema(res, res_schema)
-                    if ok_2:
-                        logger.debug('response is ok')
-                    else:
-                        logger.warn('response is bad')
-                        res = err_msg(2, ex_2)
-                else:
-                    logger.warn('request is bad')
-                    res = err_msg(1, ex_1)
-            except Exception as ex_3:
-                logger.warn('unknown error: %s', ex_3)
-                res = err_msg(-1, ex_3)
 
-            return jsonify(res), 200, {'Access-Control-Allow-Origin': '*'}
-        
-        return decorated
+def check_token(token, app):
 
-    return fdec
+    if app.token:
+        return token == app.token
+    else:
+        return True
 
