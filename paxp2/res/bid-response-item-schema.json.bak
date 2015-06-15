@@ -9,6 +9,20 @@
     "id": {
       "type": "string"
     },
+    "data": {
+      "type": "object",
+      "properties": {
+        "img": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "app_url": {
+          "type": "string"
+        }
+      }
+    },
     "price": {
       "type": "number"
     },

@@ -12,11 +12,25 @@
         "type":"object",
         "required":[  
           "id",
-          "m_id"
+          "data"
         ],
         "properties":{  
           "id":{  
             "type":"string"
+          },
+          "data":{  
+            "type":"object",
+            "properties":{  
+              "img":{  
+                "type":"string"
+              },
+              "text":{  
+                "type":"string"
+              },
+              "app_url":{  
+                "type":"string"
+              }
+            }
           },
           "click_through_url":{  
             "type":"array",

@@ -18,13 +18,9 @@
       "type": "object",
       "required": [
         "type",
-        "floor",
-        "param"
+        "floor"
       ],
       "properties": {
-        "id": {
-          "type": "integer"
-        },
         "type": {
           "type": "integer",
           "enum": [
